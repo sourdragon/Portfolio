@@ -7,7 +7,7 @@ function App() {
   
   return (
     <div className='bg-indigo-950 w-screen h-screen'>
-      {isDesktop ? <Desktop style={{backgroundColor : 'red'}} /> : <Mobile />  }
+      {isDesktop ? <Desktop /> : <Mobile />  }
     </div>
   )
 }
