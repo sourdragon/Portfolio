@@ -1,5 +1,5 @@
 const TopActivityPane = ({ config }) => {
-    return <div className="flex flex-row items-center justify-center w-full h-full">
+    return <div className="flex flex-row items-center justify-center">
         
     </div>
 }

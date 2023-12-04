@@ -23,10 +23,19 @@
 }
 ```
 
-### Laying out the problem
-- First we have to update a state variable when the user scrolls, now when this change happens , the unneeded components must animate themselves , then unmount ,and once those are done, the new ones must mount themselves...
-1. How to play transition bw each component?
-2. What tool to use for layout?
-  - Grid 
-  - Flexbox + CSS percentage
-  - Flex + Grid
+### Now what ...
+[ ] Make a bordered layout + mount and unmount animation (from parent using gsap)
+    - absolute positioning
+    - flexbox
+[ ] Make each component with custom animation if needed
+
+1. How to like position between phone and pc?
+Ok firstly we pass isDesktop to the children. But should we pass the size of the screen to the children themselves ? Yea it makes the code less complicated... But how to properly apply margins... And also the props of
+- grid-gap 
+- colors -> we'll use tailwind for this 
+must be changable from the parent compo or from a single point
+
+2. Should the styles be given in the parent component via js or via css?
+- We just want to set the position and that can be done via tailwind....
+
+Ta da :) 

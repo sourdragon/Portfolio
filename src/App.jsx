@@ -1,13 +1,24 @@
-import { useState, useEffect } from 'react'
-import Desktop from './Desktop';
-import Mobile from './Mobile'
+import { useState, useEffect } from 'react';
+import AnimatedStripe from './components/AnimatedStripe';
+
 
 function App() {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576)
-  
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 576)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, []);
+
+
   return (
-    <div className='bg-indigo-950 w-screen h-screen'>
-      {isDesktop ? <Desktop /> : <Mobile />  }
+    <div className='bg-ctp-base w-screen h-screen'>
+      <AnimatedStripe />
     </div>
   )
 }
