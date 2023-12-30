@@ -13,7 +13,7 @@ const AnimatedStripe = ({ opts }) => {
       ? parentRef.current.clientWidth / config.length
       : 60;
     let gap = config.gap ? config.gap : 50;
-    let length = Math.floor(parentRef.current.clientWidth / (gap + width)) + 4;
+    let length = Math.floor(parentRef.current.clientWidth / (gap + width)) + 8;
 
     setConfig((prev) => ({
       ...prev,
@@ -26,18 +26,18 @@ const AnimatedStripe = ({ opts }) => {
 
   useLayoutEffect(() => {
     if (config.length) {
-      // const swiftForward = gsap.to(
-      //   [".animatedStripeTop", ".animatedStripeBtm"],
-      //   {
-      //     // x : -(config.width + config.gap) * (config.length - 1),
-      //     x:
-      //       (config.width + config.gap) *
-      //       (config.direction === "forward" ? 1 : -1),
-      //     ease: "none",
-      //     duration: 3,
-      //     repeat: -1,
-      //   }
-      // );
+      const swiftForward = gsap.to(
+        [".animatedStripeTop", ".animatedStripeBtm"],
+        {
+          // x : -(config.width + config.gap) * (config.length - 1),
+          x:
+            (config.width + config.gap) *
+            (config.direction === "forward" ? 1 : -1),
+          ease: "none",
+          duration: 3,
+          repeat: -1,
+        }
+      );
 
       const t1 = gsap
         .timeline({
@@ -49,7 +49,7 @@ const AnimatedStripe = ({ opts }) => {
           },
         })
         // .to({}, { duration: 2 })
-        .set(".animatedStripeTop", {
+        .to(".animatedStripeTop", {
           // transformOrigin: `0px ${config.height}px`,
           rotate: "45deg",
         })
@@ -62,7 +62,7 @@ const AnimatedStripe = ({ opts }) => {
           "<"
         )
         .to({}, { duration: 2 })
-        .set("animatedStripeBtm" , {transformOrigin: `0px ${2 * config.height}px`,})
+        .set("animatedStripeBtm" , {transformOrigin : '0px 0px'})
         .to(
           ".animatedStripeBtm",
           {
@@ -87,9 +87,10 @@ const AnimatedStripe = ({ opts }) => {
               <div
                 className={`animatedStripeTop bg-ctp-blue absolute`}
                 style={{
+                  transformOrigin : `0px ${2 * config.height}px`,
                   width: config.width,
                   height: config.height * 3,
-                  left: (i - 2) * (config.width + config.gap),
+                  left: (i - 4) * (config.width + config.gap),
                   top: -config.height, // this would leave config.height over the top and config.height visible on screen and another config.height over the bottom
                 }}
               ></div>
@@ -106,9 +107,10 @@ const AnimatedStripe = ({ opts }) => {
             className={`animatedStripeBtm bg-ctp-maroon absolute`}
             key={i}
             style={{
+              transformOrigin : `0px ${config.height}px`,
               width: config.width,
               height: config.height * 3,
-              left: (i - 2) * (config.width + config.gap),
+              left: (i - 4) * (config.width + config.gap),
               bottom: -config.height,
             }}
           ></div>
