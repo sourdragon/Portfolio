@@ -39,39 +39,109 @@ const AnimatedStripe = ({ opts }) => {
         }
       );
 
-      const t1 = gsap
+      const tl = gsap
         .timeline({
           yoyo: true,
           repeat: -1,
           defaults: {
             ease: "linear",
-            duration: 1,
+            duration: 2,
           },
         })
-        // .to({}, { duration: 2 })
-        .to(".animatedStripeTop", {
-          // transformOrigin: `0px ${config.height}px`,
-          rotate: "45deg",
-        })
-        .to(
-          ".animatedStripeBtm",
-          {
-            // transformOrigin: `0px ${2 * config.height}`,
-            rotate: "-45deg",
-          },
-          "<"
-        )
-        .to({}, { duration: 2 })
-        .set("animatedStripeBtm" , {transformOrigin : '0px 0px'})
-        .to(
-          ".animatedStripeBtm",
-          {
+        // .to(".animatedStripeTop", {
+        //   rotate: "45deg",
+        // })
+        // .to(
+        //   ".animatedStripeBtm",
+        //   {
+        //     rotate: "-45deg",
+        //   },
+        //   "<"
+        // )
+        // .to(
+        //   ".animatedStripeBtm",
+        //   {
             
-            rotate: "45deg",
-          },
-          "<"
-        )
-        .to({} , {duration : 2 })
+        //     rotate: "45deg",
+        //   },
+        //   "<"
+        // )
+
+        
+
+        const leanForward = (durationMult,tweenProps) => {
+          return tl
+            .to(".animatedStripeTop", {
+              rotate: "45deg",
+              duration: tl.vars.defaults.duration *  (durationMult ?? 1 ),
+              ...tweenProps
+            })
+            .to(
+              ".animatedStripeBtm",
+              {
+                rotate: "45deg",
+                duration: tl.vars.defaults.duration *  (durationMult ?? 1 ),
+                ...tweenProps
+              },
+              "<"
+            );
+        }
+
+        const leanBackward = (durationMult,tweenProps) => {
+          return tl
+            .to(".animatedStripeTop", {
+              rotate: "-45deg",
+              duration: tl.vars.defaults.duration * (durationMult ?? 1 ),
+              ...tweenProps
+            })
+            .to(".animatedStripeBtm", {
+                rotate: "-45deg",
+                duration: tl.vars.defaults.duration *  (durationMult ?? 1 ),
+                ...tweenProps
+              }, "<"
+            );
+        }
+
+        const pierceBackwards = (durationMult,tweenProps) => {
+          return tl
+            .to(".animatedStripeTop", {
+              rotate: "45deg",
+              duration: tl.vars.defaults.duration *  (durationMult ?? 1 ),
+              ...tweenProps
+            })
+            .to(
+              ".animatedStripeBtm",
+              {
+                rotate: "-45deg",
+                duration: tl.vars.defaults.duration *  (durationMult ?? 1 ),
+                ...tweenProps
+              },
+              "<"
+            );
+        }
+
+        const pierceFowards = (durationMult,tweenProps) => {
+          return tl
+            .to(".animatedStripeTop", {
+              rotate: "-45deg",
+              duration: tl.vars.defaults.duration *  (durationMult ?? 1 ),
+              ...tweenProps
+            })
+            .to(
+              ".animatedStripeBtm",
+              {
+                rotate: "45deg",
+                duration: tl.vars.defaults.duration *  (durationMult ?? 1 ),
+                ...tweenProps
+              },
+              "<"
+            );
+        }
+
+        leanForward()
+        leanBackward()
+        pierceFowards()
+        pierceBackwards()
     }
   }, [config]);
   return (
@@ -87,7 +157,7 @@ const AnimatedStripe = ({ opts }) => {
               <div
                 className={`animatedStripeTop bg-ctp-blue absolute`}
                 style={{
-                  transformOrigin : `0px ${2 * config.height}px`,
+                  transformOrigin : `50% ${2 * config.height}px`,
                   width: config.width,
                   height: config.height * 3,
                   left: (i - 4) * (config.width + config.gap),
@@ -107,7 +177,7 @@ const AnimatedStripe = ({ opts }) => {
             className={`animatedStripeBtm bg-ctp-maroon absolute`}
             key={i}
             style={{
-              transformOrigin : `0px ${config.height}px`,
+              transformOrigin : `50% ${config.height}px`,
               width: config.width,
               height: config.height * 3,
               left: (i - 4) * (config.width + config.gap),
