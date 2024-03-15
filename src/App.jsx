@@ -1,26 +1,26 @@
-import { useState, useEffect } from 'react';
-import AnimatedStripe from './components/AnimatedStripe';
-
+import { useState, useEffect } from "react";
+import AnimatedStripe from "./components/AnimatedStripe";
+import NamePane from "./components/NamePane";
 
 function App() {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576)
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 576);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth > 576)
-    }
-    window.addEventListener('resize', handleResize)
+      setIsDesktop(window.innerWidth > 576);
+    };
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-
   return (
-    <div className='bg-ctp-base w-screen h-screen'>
+    <div className="bg-ctp-base w-screen h-screen">
       <AnimatedStripe />
+      <NamePane />
     </div>
-  )
+  );
 }
 
 export default App;
