@@ -17,6 +17,7 @@ function App() {
 
   return (
     <div className="bg-ctp-base w-screen h-screen">
+      <h1>Adithya</h1>
       <AnimatedStripe />
       <NamePane />
     </div>
