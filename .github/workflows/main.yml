@@ -5,7 +5,7 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches:
-      - gh-pages
+      - 'gh-pages'
 # Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
